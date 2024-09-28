@@ -1,0 +1,61 @@
+{
+  "kind": "collectionType",
+  "collectionName": "subscriptions",
+  "info": {
+    "singularName": "subscription",
+    "pluralName": "subscriptions",
+    "displayName": "Subscription",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "subscriptionType": {
+      "type": "enumeration",
+      "enum": [
+        "Basic",
+        "Professional",
+        "Expert"
+      ],
+      "default": "Basic"
+    },
+    "customRecommendations": {
+      "type": "string"
+    },
+    "complianceDashboard": {
+      "type": "string"
+    },
+    "regulatoryUpdates": {
+      "type": "string"
+    },
+    "prioritySupport": {
+      "type": "string"
+    },
+    "onboardingAssistance": {
+      "type": "string"
+    },
+    "complianceCertification": {
+      "type": "string"
+    },
+    "consultation": {
+      "type": "string"
+    },
+    "numberofUsers": {
+      "type": "string"
+    },
+    "numberOfQuizzes": {
+      "type": "string"
+    },
+    "assessmentQuizzes": {
+      "type": "string"
+    },
+    "complianceRiskScoring": {
+      "type": "string"
+    },
+    "detailedReporting": {
+      "type": "string"
+    }
+  }
+}
