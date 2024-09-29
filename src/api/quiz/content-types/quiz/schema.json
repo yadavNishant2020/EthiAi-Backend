@@ -18,15 +18,15 @@
     "Description": {
       "type": "text"
     },
-    "Questions": {
-      "type": "component",
-      "repeatable": true,
-      "component": "quiz.quiz"
-    },
     "subscription": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::subscription.subscription"
+    },
+    "hehehehhe": {
+      "type": "component",
+      "repeatable": true,
+      "component": "quiz-question.quiz-question"
     }
   }
 }

@@ -1,24 +1,34 @@
 import type { Struct, Schema } from '@strapi/strapi';
 
-export interface QuizQuiz extends Struct.ComponentSchema {
-  collectionName: 'components_quiz_quizzes';
+export interface QuizQuestionQuizQuestion extends Struct.ComponentSchema {
+  collectionName: 'components_quiz_questions';
   info: {
-    displayName: 'quiz';
+    name: 'Quiz Question';
+    icon: 'question';
+    description: 'A component to create different types of quiz questions';
+  };
+  options: {
+    timestamps: false;
+    draftAndPublish: false;
   };
   attributes: {
-    Question: Schema.Attribute.String & Schema.Attribute.Required;
-    answerChoices: Schema.Attribute.JSON;
-    correctAnswer: Schema.Attribute.String;
-    questionType: Schema.Attribute.Enumeration<
-      ['multiple-choice', 'true-false', 'short-answer']
-    >;
+    question_text: Schema.Attribute.String & Schema.Attribute.Required;
+    type: Schema.Attribute.Enumeration<
+      ['radio', 'checkbox', 'text', 'descriptive']
+    > &
+      Schema.Attribute.Required;
+    options: Schema.Attribute.JSON & Schema.Attribute.DefaultTo<[]>;
+    risk_score: Schema.Attribute.Integer;
+    gaps: Schema.Attribute.Text;
+    recommendations: Schema.Attribute.Text;
+    answers_required: Schema.Attribute.Boolean;
   };
 }
 
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
-      'quiz.quiz': QuizQuiz;
+      'quiz-question.quiz-question': QuizQuestionQuizQuestion;
     }
   }
 }
