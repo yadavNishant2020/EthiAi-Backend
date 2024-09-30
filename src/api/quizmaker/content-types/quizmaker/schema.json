@@ -1,0 +1,60 @@
+{
+  "kind": "collectionType",
+  "collectionName": "quizmakers",
+  "info": {
+    "singularName": "quizmaker",
+    "pluralName": "quizmakers",
+    "displayName": "quiz-maker",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "UID": {
+      "type": "uid",
+      "targetField": "UserName"
+    },
+    "UserName": {
+      "type": "string"
+    },
+    "Email": {
+      "type": "email"
+    },
+    "Password": {
+      "type": "password"
+    },
+    "FirstName": {
+      "type": "string"
+    },
+    "LastName": {
+      "type": "string"
+    },
+    "DateOfBirth": {
+      "type": "date"
+    },
+    "Gender": {
+      "type": "string"
+    },
+    "Photo": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "quizzes": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::quiz.quiz",
+      "mappedBy": "quiz_maker"
+    },
+    "subscription": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::subscription.subscription",
+      "inversedBy": "quiz_maker"
+    }
+  }
+}

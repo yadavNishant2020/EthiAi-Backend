@@ -1,0 +1,52 @@
+{
+  "kind": "collectionType",
+  "collectionName": "questions",
+  "info": {
+    "singularName": "question",
+    "pluralName": "questions",
+    "displayName": "Question",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "ComplianceRequirement": {
+      "type": "string"
+    },
+    "RiskLevel": {
+      "type": "string"
+    },
+    "QuestionName": {
+      "type": "string"
+    },
+    "quiz": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::quiz.quiz",
+      "inversedBy": "questions"
+    },
+    "QuestionType": {
+      "type": "enumeration",
+      "enum": [
+        "Radio button",
+        "Check Box"
+      ]
+    },
+    "Penalty": {
+      "type": "text"
+    },
+    "options": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::option.option",
+      "mappedBy": "question"
+    },
+    "answer": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::answer.answer",
+      "mappedBy": "question"
+    }
+  }
+}

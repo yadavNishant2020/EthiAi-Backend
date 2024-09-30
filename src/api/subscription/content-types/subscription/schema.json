@@ -8,54 +8,57 @@
     "description": ""
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
-  "pluginOptions": {},
   "attributes": {
-    "subscriptionType": {
-      "type": "enumeration",
-      "enum": [
-        "Basic",
-        "Professional",
-        "Expert"
-      ],
-      "default": "Basic"
-    },
-    "customRecommendations": {
+    "Tier": {
       "type": "string"
     },
-    "complianceDashboard": {
+    "NumberOfUsers": {
+      "type": "integer"
+    },
+    "NumberOfQuizzes": {
+      "type": "integer"
+    },
+    "AssessmentQuizzes": {
       "type": "string"
     },
-    "regulatoryUpdates": {
+    "ComplianceRiskScoring": {
       "type": "string"
     },
-    "prioritySupport": {
+    "DetailedReporting": {
       "type": "string"
     },
-    "onboardingAssistance": {
+    "CustomRecommendations": {
       "type": "string"
     },
-    "complianceCertification": {
+    "ComplianceDashboard": {
       "type": "string"
     },
-    "consultation": {
+    "RegulatoryUpdates": {
       "type": "string"
     },
-    "numberofUsers": {
+    "PrioritySupport": {
       "type": "string"
     },
-    "numberOfQuizzes": {
+    "OnboardingAssistance": {
       "type": "string"
     },
-    "assessmentQuizzes": {
+    "ComplianceCertification": {
       "type": "string"
     },
-    "complianceRiskScoring": {
+    "Consultation": {
       "type": "string"
     },
-    "detailedReporting": {
-      "type": "string"
+    "subscriptionID": {
+      "type": "uid",
+      "targetField": "Tier"
+    },
+    "quiz_maker": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::quizmaker.quizmaker",
+      "mappedBy": "subscription"
     }
   }
 }

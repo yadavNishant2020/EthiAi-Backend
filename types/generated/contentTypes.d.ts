@@ -1,123 +1,5 @@
 import type { Struct, Schema } from '@strapi/strapi';
 
-export interface ApiQuizQuiz extends Struct.CollectionTypeSchema {
-  collectionName: 'quizzes';
-  info: {
-    singularName: 'quiz';
-    pluralName: 'quizzes';
-    displayName: 'quiz';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    Title: Schema.Attribute.String;
-    Description: Schema.Attribute.Text;
-    subscription: Schema.Attribute.Relation<
-      'oneToOne',
-      'api::subscription.subscription'
-    >;
-    hehehehhe: Schema.Attribute.Component<'quiz-question.quiz-question', true>;
-    createdAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    publishedAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String;
-    localizations: Schema.Attribute.Relation<'oneToMany', 'api::quiz.quiz'>;
-  };
-}
-
-export interface ApiSubscriptionSubscription
-  extends Struct.CollectionTypeSchema {
-  collectionName: 'subscriptions';
-  info: {
-    singularName: 'subscription';
-    pluralName: 'subscriptions';
-    displayName: 'Subscription';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    subscriptionType: Schema.Attribute.Enumeration<
-      ['Basic', 'Professional', 'Expert']
-    > &
-      Schema.Attribute.DefaultTo<'Basic'>;
-    customRecommendations: Schema.Attribute.String;
-    complianceDashboard: Schema.Attribute.String;
-    regulatoryUpdates: Schema.Attribute.String;
-    prioritySupport: Schema.Attribute.String;
-    onboardingAssistance: Schema.Attribute.String;
-    complianceCertification: Schema.Attribute.String;
-    consultation: Schema.Attribute.String;
-    numberofUsers: Schema.Attribute.String;
-    numberOfQuizzes: Schema.Attribute.String;
-    assessmentQuizzes: Schema.Attribute.String;
-    complianceRiskScoring: Schema.Attribute.String;
-    detailedReporting: Schema.Attribute.String;
-    createdAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    publishedAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::subscription.subscription'
-    >;
-  };
-}
-
-export interface ApiSubscriptionTypeSubscriptionType
-  extends Struct.CollectionTypeSchema {
-  collectionName: 'subscription_types';
-  info: {
-    singularName: 'subscription-type';
-    pluralName: 'subscription-types';
-    displayName: 'subscriptionType';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    type: Schema.Attribute.Enumeration<['Basic', 'Professional', 'Expert']>;
-    numberOfUsers: Schema.Attribute.Integer;
-    numberOfQuizzes: Schema.Attribute.Integer;
-    assessmentQuizzes: Schema.Attribute.Text;
-    complianceRiskScoring: Schema.Attribute.Text;
-    detailedReporting: Schema.Attribute.Text;
-    customRecommendations: Schema.Attribute.Text;
-    complianceDashboard: Schema.Attribute.Text;
-    regulatoryUpdates: Schema.Attribute.Enumeration<
-      ['Yearly', 'Quarterly', 'Monthly']
-    >;
-    prioritySupport: Schema.Attribute.Text;
-    onboardingAssistance: Schema.Attribute.Text;
-    complianceCertification: Schema.Attribute.Text;
-    consultation: Schema.Attribute.Text;
-    price: Schema.Attribute.Decimal;
-    createdAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    publishedAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::subscription-type.subscription-type'
-    >;
-  };
-}
-
 export interface PluginUploadFile extends Struct.CollectionTypeSchema {
   collectionName: 'files';
   info: {
@@ -603,6 +485,211 @@ export interface PluginUsersPermissionsUser
   };
 }
 
+export interface ApiAnswerAnswer extends Struct.CollectionTypeSchema {
+  collectionName: 'answers';
+  info: {
+    singularName: 'answer';
+    pluralName: 'answers';
+    displayName: 'Answer';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    question: Schema.Attribute.Relation<'oneToOne', 'api::question.question'>;
+    options: Schema.Attribute.Relation<'oneToMany', 'api::option.option'>;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::answer.answer'>;
+  };
+}
+
+export interface ApiOptionOption extends Struct.CollectionTypeSchema {
+  collectionName: 'options';
+  info: {
+    singularName: 'option';
+    pluralName: 'options';
+    displayName: 'option';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    Name: Schema.Attribute.String;
+    riskScore: Schema.Attribute.BigInteger;
+    question: Schema.Attribute.Relation<'manyToOne', 'api::question.question'>;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::option.option'>;
+  };
+}
+
+export interface ApiQuestionQuestion extends Struct.CollectionTypeSchema {
+  collectionName: 'questions';
+  info: {
+    singularName: 'question';
+    pluralName: 'questions';
+    displayName: 'Question';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    ComplianceRequirement: Schema.Attribute.String;
+    RiskLevel: Schema.Attribute.String;
+    QuestionName: Schema.Attribute.String;
+    quiz: Schema.Attribute.Relation<'manyToOne', 'api::quiz.quiz'>;
+    QuestionType: Schema.Attribute.Enumeration<['Radio button', 'Check Box']>;
+    Penalty: Schema.Attribute.Text;
+    options: Schema.Attribute.Relation<'oneToMany', 'api::option.option'>;
+    answer: Schema.Attribute.Relation<'oneToOne', 'api::answer.answer'>;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::question.question'
+    >;
+  };
+}
+
+export interface ApiQuizQuiz extends Struct.CollectionTypeSchema {
+  collectionName: 'quizzes';
+  info: {
+    singularName: 'quiz';
+    pluralName: 'quizzes';
+    displayName: 'Quiz';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    questions: Schema.Attribute.Relation<'oneToMany', 'api::question.question'>;
+    quizTitle: Schema.Attribute.String;
+    quiz_maker: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::quizmaker.quizmaker'
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::quiz.quiz'>;
+  };
+}
+
+export interface ApiQuizmakerQuizmaker extends Struct.CollectionTypeSchema {
+  collectionName: 'quizmakers';
+  info: {
+    singularName: 'quizmaker';
+    pluralName: 'quizmakers';
+    displayName: 'quiz-maker';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    UID: Schema.Attribute.UID<'UserName'>;
+    UserName: Schema.Attribute.String;
+    Email: Schema.Attribute.Email;
+    Password: Schema.Attribute.Password;
+    FirstName: Schema.Attribute.String;
+    LastName: Schema.Attribute.String;
+    DateOfBirth: Schema.Attribute.Date;
+    Gender: Schema.Attribute.String;
+    Photo: Schema.Attribute.Media<'images'>;
+    quizzes: Schema.Attribute.Relation<'oneToMany', 'api::quiz.quiz'>;
+    subscription: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::subscription.subscription'
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::quizmaker.quizmaker'
+    >;
+  };
+}
+
+export interface ApiSubscriptionSubscription
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'subscriptions';
+  info: {
+    singularName: 'subscription';
+    pluralName: 'subscriptions';
+    displayName: 'Subscription';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    Tier: Schema.Attribute.String;
+    NumberOfUsers: Schema.Attribute.Integer;
+    NumberOfQuizzes: Schema.Attribute.Integer;
+    AssessmentQuizzes: Schema.Attribute.String;
+    ComplianceRiskScoring: Schema.Attribute.String;
+    DetailedReporting: Schema.Attribute.String;
+    CustomRecommendations: Schema.Attribute.String;
+    ComplianceDashboard: Schema.Attribute.String;
+    RegulatoryUpdates: Schema.Attribute.String;
+    PrioritySupport: Schema.Attribute.String;
+    OnboardingAssistance: Schema.Attribute.String;
+    ComplianceCertification: Schema.Attribute.String;
+    Consultation: Schema.Attribute.String;
+    subscriptionID: Schema.Attribute.UID<'Tier'>;
+    quiz_maker: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::quizmaker.quizmaker'
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::subscription.subscription'
+    >;
+  };
+}
+
 export interface AdminPermission extends Struct.CollectionTypeSchema {
   collectionName: 'admin_permissions';
   info: {
@@ -968,9 +1055,6 @@ export interface AdminTransferTokenPermission
 declare module '@strapi/strapi' {
   export module Public {
     export interface ContentTypeSchemas {
-      'api::quiz.quiz': ApiQuizQuiz;
-      'api::subscription.subscription': ApiSubscriptionSubscription;
-      'api::subscription-type.subscription-type': ApiSubscriptionTypeSubscriptionType;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::i18n.locale': PluginI18NLocale;
@@ -981,6 +1065,12 @@ declare module '@strapi/strapi' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'api::answer.answer': ApiAnswerAnswer;
+      'api::option.option': ApiOptionOption;
+      'api::question.question': ApiQuestionQuestion;
+      'api::quiz.quiz': ApiQuizQuiz;
+      'api::quizmaker.quizmaker': ApiQuizmakerQuizmaker;
+      'api::subscription.subscription': ApiSubscriptionSubscription;
       'admin::permission': AdminPermission;
       'admin::user': AdminUser;
       'admin::role': AdminRole;

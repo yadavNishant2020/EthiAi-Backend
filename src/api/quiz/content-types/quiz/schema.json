@@ -4,29 +4,27 @@
   "info": {
     "singularName": "quiz",
     "pluralName": "quizzes",
-    "displayName": "quiz",
+    "displayName": "Quiz",
     "description": ""
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
-  "pluginOptions": {},
   "attributes": {
-    "Title": {
+    "questions": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::question.question",
+      "mappedBy": "quiz"
+    },
+    "quizTitle": {
       "type": "string"
     },
-    "Description": {
-      "type": "text"
-    },
-    "subscription": {
+    "quiz_maker": {
       "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::subscription.subscription"
-    },
-    "hehehehhe": {
-      "type": "component",
-      "repeatable": true,
-      "component": "quiz-question.quiz-question"
+      "relation": "manyToOne",
+      "target": "api::quizmaker.quizmaker",
+      "inversedBy": "quizzes"
     }
   }
 }
